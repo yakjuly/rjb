@@ -28,10 +28,15 @@ class Path
 
 end
 
-javahome = ENV['JAVA_HOME']
+#for heroku
+ENV["JAVA_HOME"] ||= "/Library/Java/Home"
+
+javahome = ENV['JAVA_HOME'] 
+
 if javahome.nil? && RUBY_PLATFORM =~ /darwin/
   javahome = `/usr/libexec/java_home`.strip
 end
+
 unless javahome.nil?
   if javahome[0] == ?" && javahome[-1] == ?"
     javahome = javahome[1..-2]
